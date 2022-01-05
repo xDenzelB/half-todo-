@@ -29,12 +29,12 @@ todoForm.addEventListener('submit', async(e) => {
 
 async function displayTodos() {
     // fetch the todos
-    const todos = await getTodos();
+    const todoList = await getTodos();
      
     // display the list of todos
     todosEl.textContent = '';
 
-    for (let todo of todos) {
+    for (let todo of todoList) {
         const todoEl = renderTodo(todo);
     
 
@@ -49,6 +49,10 @@ async function displayTodos() {
     }
 }
 // add an on load listener that fetches and displays todos on load
+
+window.addEventListener('load', async() => {
+    displayTodos();
+});
 
 logoutButton.addEventListener('click', () => {
     logout();

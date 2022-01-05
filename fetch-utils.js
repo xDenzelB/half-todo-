@@ -31,7 +31,8 @@ export async function getTodos() {
     const response = await client
         .from('todos')
         .select()
-        .order('complete');
+        .order('complete')
+        .match({ user_id: client.auth.user().id });
 
     return checkError(response);    
 }
