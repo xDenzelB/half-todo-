@@ -11,25 +11,37 @@ export async function createTodo(todo){
             todo: todo,
             complete: false,
             
-        });
+        })
+        .single();
 
     return checkError(response);
 }
 
 export async function deleteAllTodos() {
     // delete all todos for this user in supabase
+    const response = await client
+        .from('todos')
+        .delete();
 
     return checkError(response);
 }
 
 export async function getTodos() {
     // get all todos for this user from supabase
+    const response = await client
+        .from('todos')
+        .select()
+        .order('complete');
 
     return checkError(response);    
 }
 
 export async function completeTodo(id) {
     // find the and update (set complete to true), the todo that matches the correct id
+    const response = await client
+        .from('todos')
+        .update({ complete: true })
+        .match({ id: id });
 
     return checkError(response);    
 }
